@@ -7,6 +7,17 @@ import (
 	"net/http"
 )
 
+func write_json(name string, data interface{}) {
+	file, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		fmt.Println("Error writing JSON : ", err)
+	}
+	err = ioutil.WriteFile(name, file, 0644)
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+	}
+}
+
 func read_json(name string) []string {
 	//Read the json file
 	var slice []string
